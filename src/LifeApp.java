@@ -1,14 +1,14 @@
 public class LifeApp
 {
     private LifeModel model;
-    private LifeView view;
+    private LifeConsoleView view;
     private LifePanelView panelView;
     private LifeController controller;
 
     public LifeApp()
     {
         model = new LifeModel();
-        view = new LifeView(model);
+        view = new LifeConsoleView(model);
         panelView = new LifePanelView(model);
         controller = new LifeController(model);
 

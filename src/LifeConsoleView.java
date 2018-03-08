@@ -1,11 +1,11 @@
 import java.util.Observable;
 import java.util.Observer;
 
-public class LifeView implements Observer
+public class LifeConsoleView implements Observer
 {
     private LifeModel model;
 
-    public LifeView(LifeModel model)
+    public LifeConsoleView(LifeModel model)
     {
         this.model = model;
         model.addObserver(this);
