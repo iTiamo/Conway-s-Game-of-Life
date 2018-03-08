@@ -4,26 +4,19 @@ import java.awt.event.ActionListener;
 
 public class LifeController implements ActionListener
 {
-    private LifeModel model;
-    private LifeView view;
-
     private Timer timer;
+    private LifeModel model;
 
-    public LifeController(LifeModel model, LifeView view)
+    public LifeController(LifeModel model)
     {
-        this.model = model;
-        this.view = view;
-
         timer = new Timer(1000, this);
+        this.model = model;
         timer.start();
-
-        view.toonBord();
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
         model.updateBord();
-        view.toonBord();
     }
 }

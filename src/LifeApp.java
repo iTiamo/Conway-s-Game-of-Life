@@ -2,13 +2,15 @@ public class LifeApp
 {
     private LifeModel model;
     private LifeView view;
+    private LifePanelView panelView;
     private LifeController controller;
 
     public LifeApp()
     {
         model = new LifeModel();
         view = new LifeView(model);
-        controller = new LifeController(model, view);
+        panelView = new LifePanelView(model);
+        controller = new LifeController(model);
 
         while (true) { }
     }

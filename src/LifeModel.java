@@ -1,19 +1,15 @@
+import java.util.Observable;
 import java.util.Random;
 
-public class LifeModel
+public class LifeModel extends Observable
 {
-    private final int RIJEN = 20;
-    private final int KOLOMMEN = 30;
+    protected final int RIJEN = 20;
+    protected final int KOLOMMEN = 30;
     private final int KANS_OP_LEVENDE_CEL = 25;
 
     protected boolean[][] bord;
 
     public LifeModel()
-    {
-         maakBord();
-    }
-
-    private void maakBord()
     {
         Random generator = new Random();
         bord = new boolean[RIJEN][KOLOMMEN];
@@ -30,6 +26,9 @@ public class LifeModel
             for (int k = 0; k < KOLOMMEN; k++)
                 nieuwBord[r][k] = checkLevend(r, k);
         bord = nieuwBord;
+
+        setChanged();
+        notifyObservers();
     }
 
     private boolean checkLevend(int rij, int kolom)

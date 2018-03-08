@@ -1,10 +1,14 @@
-public class LifeView
+import java.util.Observable;
+import java.util.Observer;
+
+public class LifeView implements Observer
 {
     private LifeModel model;
 
     public LifeView(LifeModel model)
     {
         this.model = model;
+        model.addObserver(this);
     }
 
     protected void toonBord()
@@ -21,5 +25,11 @@ public class LifeView
             }
             System.out.print("\n");
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg)
+    {
+        toonBord();
     }
 }
