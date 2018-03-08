@@ -1,15 +1,12 @@
 public class LifeApp
 {
-    private static final int RIJEN = 20;
-    private static final int KOLOMMEN = 30;
-
     private LifeModel model;
     private LifeView view;
     private LifeController controller;
 
-    public LifeApp(int rijen, int kolommen)
+    public LifeApp()
     {
-        model = new LifeModel(rijen, kolommen);
+        model = new LifeModel();
         view = new LifeView(model);
         controller = new LifeController(model, view);
 
@@ -18,6 +15,6 @@ public class LifeApp
 
     public static void main(String[] args)
     {
-        new LifeApp(RIJEN, KOLOMMEN);
+        new LifeApp();
     }
 }

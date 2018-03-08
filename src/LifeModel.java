@@ -2,68 +2,44 @@ import java.util.Random;
 
 public class LifeModel
 {
+    private final int RIJEN = 20;
+    private final int KOLOMMEN = 30;
     private final int KANS_OP_LEVENDE_CEL = 25;
-    private final int RIJEN;
-    private final int KOLOMMEN;
 
-    private Random generator;
     protected boolean[][] bord;
 
-    public LifeModel(int rijen, int kolommen)
+    public LifeModel()
     {
-        this.RIJEN = rijen;
-        this.KOLOMMEN = kolommen;
-
-        maakBord();
+         maakBord();
     }
 
     private void maakBord()
     {
-        generator = new Random();
+        Random generator = new Random();
         bord = new boolean[RIJEN][KOLOMMEN];
 
-        for (int r = 0; r < bord.length; r++)
-        {
-            for (int k = 0; k < bord[r].length; k++)
-            {
-                if ((generator.nextInt(100) + 1) <= KANS_OP_LEVENDE_CEL)
-                    bord[r][k] = true;
-                else
-                    bord[r][k] = false;
-            }
-        }
+        for (int r = 0; r < RIJEN; r++)
+            for (int k = 0; k < KOLOMMEN; k++)
+                bord[r][k] = ((generator.nextInt(100) + 1) <= KANS_OP_LEVENDE_CEL);
     }
 
     protected void updateBord()
     {
         boolean[][] nieuwBord = new boolean[RIJEN][KOLOMMEN];
-        for (int r = 0; r < bord.length; r++)
-        {
-            for (int k = 0; k < bord[r].length; k++)
-            {
-                if(bord[r][k])
-                {
-                    switch (getAantalBurenCel(r, k))
-                    {
-                        case 0: case 1:
-                            nieuwBord[r][k] = false;
-                            break;
-                        case 2: case 3:
-                            nieuwBord[r][k] = true;
-                            break;
-                        default:
-                            nieuwBord[r][k] = false;
-                            break;
-                    }
-                }
-                else
-                {
-                    if (getAantalBurenCel(r, k) == 3)
-                        nieuwBord[r][k] = true;
-                }
-            }
-        }
+        for (int r = 0; r < RIJEN; r++)
+            for (int k = 0; k < KOLOMMEN; k++)
+                nieuwBord[r][k] = checkLevend(r, k);
         bord = nieuwBord;
+    }
+
+    private boolean checkLevend(int rij, int kolom)
+    {
+        if (bord[rij][kolom] & getAantalBurenCel(rij, kolom) == 2)
+            return true;
+        else if (getAantalBurenCel(rij, kolom) == 3)
+            return true;
+        else
+            return false;
     }
 
     private int getAantalBurenCel(int rij, int kolom)

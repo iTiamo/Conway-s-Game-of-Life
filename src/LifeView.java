@@ -9,6 +9,7 @@ public class LifeView
 
     protected void toonBord()
     {
+        System.out.print("\n");
         for (int r = 0; r < model.bord.length; r++)
         {
             for (int k = 0; k < model.bord[r].length; k++)
